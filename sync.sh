@@ -10,7 +10,7 @@ backupdumpfile=/tmp/$backuptime/dump-$backuptime.sql
 
 mkdir -p $backupfolder
 
-/usr/bin/pg_dump -h db -U "$PGUSER" -f "$backupdumpfile"
+/usr/bin/pg_dumpall -h db -U "$PGUSER" -f "$backupdumpfile"
 
 gzip "$backupdumpfile"
 

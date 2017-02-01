@@ -7,7 +7,7 @@ set -e
 : ${PG_USER:?"PG_USER env variable is required"}
 : ${PG_PASSWORD:?"PG_PASSWORD env variable is required"}
 : ${S3_PATH:?"S3_PATH env variable is required"}
-CRON_SCHEDULE=${CRON_SCHEDULE:-0 1 * * *}
+CRON_SCHEDULE=${CRON_SCHEDULE:0 1 * * *}
 
 echo "access_key=$ACCESS_KEY" >> /root/.s3cfg
 echo "secret_key=$SECRET_KEY" >> /root/.s3cfg

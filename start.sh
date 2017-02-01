@@ -4,8 +4,9 @@ set -e
 
 : ${ACCESS_KEY:?"ACCESS_KEY env variable is required"}
 : ${SECRET_KEY:?"SECRET_KEY env variable is required"}
+: ${PG_USER:?"PG_USER env variable is required"}
+: ${PG_PASSWORD:?"PG_PASSWORD env variable is required"}
 : ${S3_PATH:?"S3_PATH env variable is required"}
-export DATA_PATH=${DATA_PATH:-/data/}
 CRON_SCHEDULE=${CRON_SCHEDULE:-0 1 * * *}
 
 echo "access_key=$ACCESS_KEY" >> /root/.s3cfg
@@ -21,7 +22,8 @@ else
         mkfifo "$LOGFIFO"
     fi
     CRON_ENV="PARAMS='$PARAMS'"
-    CRON_ENV="$CRON_ENV\nDATA_PATH='$DATA_PATH'"
+    CRON_ENV="$CRON_ENV\nPGPASSWORD='$PG_PASSWORD'"
+    CRON_ENV="$CRON_ENV\nPGUSER='$PG_USER'"
     CRON_ENV="$CRON_ENV\nS3_PATH='$S3_PATH'"
     echo -e "$CRON_ENV\n$CRON_SCHEDULE /sync.sh > $LOGFIFO 2>&1" | crontab -
     crontab -l

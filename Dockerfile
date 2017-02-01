@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM postgres:9.6.1
 MAINTAINER Thiago Leão Moreira <tmoreira2020@gmail.com>
 
 RUN apt-get update && \
